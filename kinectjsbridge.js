@@ -11,6 +11,24 @@
 var Kinect = function  () {
 	this.websocket = null;
 
+	//Event stuff - User will override
+	this.onFrame = function () {};
+	this.onGesture = function () {};
+
+	(function (p) {
+		p.connect = function (url){
+			p.websocket = new WebSocket((url || "http://localhost:8070/kinect"));
+
+			p.onopen = function () {
+				console.log("WebSocket open");
+			}
+
+			p.onerror = function () {
+				console.log("WebSocket error");
+			}
+		}
+
+	})(this);
 }
 
 
