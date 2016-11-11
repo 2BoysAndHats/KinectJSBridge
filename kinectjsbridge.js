@@ -26,6 +26,12 @@ var Kinect = function  () {
 			p.websocket.onerror = function () {
 				console.log("WebSocket error");
 			}
+
+			p.websocket.onmessage = function (e) {
+				var json = JSON.parse(e.data);
+
+				p[json.eventType](JSON.parse(json.data));
+			}
 		}
 
 	})(this);
@@ -33,6 +39,7 @@ var Kinect = function  () {
 
 
 Kinect.HAND_STATES = ["unknown","notTracked","open","closed","lasso"];
+Kinect.GESTURE_TYPES = ["joinedHands","waveRight","waveLeft","menu","swipeLeft","swipeRight","swipeUp","swipeDown","zoomIn","zoomOut"];
 
 Kinect.FRAME_WIDTH = 1920;
 Kinect.FRAME_HEIGHT = 1080;
