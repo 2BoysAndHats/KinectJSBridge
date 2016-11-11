@@ -17,13 +17,13 @@ var Kinect = function  () {
 
 	(function (p) {
 		p.connect = function (url){
-			p.websocket = new WebSocket((url || "http://localhost:8070/kinect"));
+			p.websocket = new WebSocket((url || "ws://localhost:8070/kinect"));
 
-			p.onopen = function () {
+			p.websocket.onopen = function () {
 				console.log("WebSocket open");
 			}
 
-			p.onerror = function () {
+			p.websocket.onerror = function () {
 				console.log("WebSocket error");
 			}
 		}
