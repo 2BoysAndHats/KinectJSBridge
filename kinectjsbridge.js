@@ -1,6 +1,6 @@
 /*
 	KinectJSBridge
-
+	 
 
 	Client for ThisMightWork
 
@@ -8,7 +8,7 @@
 */
 
 
-var Kinect = function  () {
+var Kinect = function () {
 	this.websocket = null;
 
 	//Event stuff - User will override
@@ -46,7 +46,7 @@ Kinect.FRAME_HEIGHT = 1080;
 
 
 Kinect.scaleX = function (x) {
-	return ( screen.width / Kinect.FRAME_WIDTH) * x;
+	return (screen.width / Kinect.FRAME_WIDTH) * x;
 }
 
 Kinect.scaleY = function (y) {
