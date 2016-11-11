@@ -23,7 +23,7 @@ kinect.onGesture = function (gesture){
 For more detail, see the documentation.
 
 ## Installation
-Simply follow the [server setup instructions](https://github.com/2BoysAndHats/ThisMightWork/blob/master/README.md), launch the new ThisMightWork app, and open a demo in you browser!
+Simply follow the [server setup instructions](https://github.com/2BoysAndHats/ThisMightWork/blob/master/README.md), launch the new ThisMightWork app, and open a demo in your browser!
 
 ## Documentation
 Plese see the [wiki](https://github.com/2BoysAndHats/KinectJSBridge/wiki)
