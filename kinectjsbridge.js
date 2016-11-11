@@ -46,9 +46,9 @@ Kinect.FRAME_HEIGHT = 1080;
 
 
 Kinect.scaleX = function (x) {
-	return (Kinect.FRAME_WIDTH / screen.width) * x;
+	return ( screen.width / Kinect.FRAME_WIDTH) * x;
 }
 
 Kinect.scaleY = function (y) {
-	return (Kinect.FRAME_HEIGHT / screen.height) * y;
+	return (screen.height / Kinect.FRAME_HEIGHT) * y;
 }	
