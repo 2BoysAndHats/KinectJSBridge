@@ -2,7 +2,7 @@
 ####The ThisMightWork client (A Kinect data streaming API for Windows)
 
 
-This is the client half of the ThisMightWork library. This a JavaScript library that enables web developers to develop applications that use Kinect body tracking technology super easily.
+This is the client half of the ThisMightWork library. (You can find the server half [here](https://github.com/2BoysAndHats/ThisMightWork)) This a JavaScript library that enables web developers to develop applications that use Kinect body tracking technology super easily.
 
 It also has an easy to use syntax. This is all the code you need to get started:
 
