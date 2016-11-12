@@ -6,7 +6,7 @@ This is the client half of the ThisMightWork library. This a JavaScript library 
 
 It also has an easy to use syntax. This is all the code you need to get started:
 
-```
+```js
 var kinect = new Kinect();
 kinect.connect();
 
