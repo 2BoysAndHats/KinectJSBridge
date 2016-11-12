@@ -19,6 +19,7 @@ kinect.onGesture = function (gesture){
 }
 ```
 (remembering to include the kinectjsbridge.js library!)
+(This sample was taken from the [logger demo](https://github.com/2BoysAndHats/KinectJSBridge/blob/master/demos/loggerDemo/index.html))
 
 For more detail, see the documentation.
 
