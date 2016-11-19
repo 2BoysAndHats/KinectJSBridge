@@ -45,10 +45,19 @@ Kinect.FRAME_WIDTH = 1920;
 Kinect.FRAME_HEIGHT = 1080;
 
 
-Kinect.scaleX = function (x) {
-	return (screen.width / Kinect.FRAME_WIDTH) * x;
+Kinect.scaleX = function (x,width) {
+	if(width == undefined){
+		return (screen.width / Kinect.FRAME_WIDTH) * x;
+	}else{
+		return (width / Kinect.FRAME_WIDTH) * x;
+	}
 }
 
-Kinect.scaleY = function (y) {
-	return (screen.height / Kinect.FRAME_HEIGHT) * y;
+Kinect.scaleY = function (y,height) {
+	if(height == undefined){
+		return (screen.height / Kinect.FRAME_HEIGHT) * y;
+	}else{
+		return (height / Kinect.FRAME_HEIGHT) * y;
+
+	}
 }	
