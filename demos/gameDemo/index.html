@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>KinectJSBridge Demo</title>
 	</head>
 	<body>
+		<center id="cont"></center>
+
 		<script src="../../kinectjsbridge.js"></script>
 		<script src="phaser.js"></script>
 		<script type="text/javascript">
@@ -20,16 +23,20 @@
 				console.log(Kinect.GESTURE_TYPES[gesture.GestureType]);
 			}*/
 
-			var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
-			var platforms;
-			var player;
+			var game = new Phaser.Game(800, 600, Phaser.AUTO, 'cont', { preload: preload, create: create, update: update });
+			var balloon;
+			var text;
+			var handsGroup;
+			var handLeft;
+			var handRight;
+			var score = 0;
 
 			function preload() {
 				game.load.image('sky', 'assets/sky.png');
 			    game.load.image('ground', 'assets/platform.png');
-			    game.load.image('star', 'assets/star.png');
-			    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+			    game.load.image('balloon', 'assets/balloon.png');
+			    game.load.image('hand', 'assets/hand.png');
+			    game.load.image('hand1', 'assets/hand1.png');
 			}
 
 			function create() {
@@ -41,46 +48,87 @@
 			    //  A simple background for our game
 			    game.add.sprite(0, 0, 'sky');
 
-			    //  The platforms group contains the ground and the 2 ledges we can jump on
-			    platforms = game.add.group();
+			    balloon = game.add.sprite(400,300,"balloon");
+			    balloon.scale.setTo(.3,.3)
 
-			    //  We will enable physics for any object that is created in this group
-			    platforms.enableBody = true;
+			    game.physics.enable( balloon, Phaser.Physics.ARCADE);
 
-			    // Here we create the ground.
-			    var ground = platforms.create(0, game.world.height - 64, 'ground');
+			    balloon.body.collideWorldBounds = true;
+			    balloon.body.bounce.y = 0.5;
+         		balloon.body.gravity.y = -100;
 
-			    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-			    ground.scale.setTo(2, 2);
+         		text = game.add.text(32, 32, '', { font: "50px Arial", fill: "#ccc" });
+         		text.text = "Score: 0";
 
-			    //  This stops it from falling away when you jump on it
-			    ground.body.immovable = true;
+         		handsGroup = game.add.group();
 
-			    //  Now let's create two ledges
-			    var ledge = platforms.create(400, 400, 'ground');
+         		handLeft = handsGroup.create(700,500,"hand");
+         		game.physics.enable( handLeft, Phaser.Physics.ARCADE);
+         		handLeft.scale.setTo(0.3,0.3);
+         		handLeft.body.collideWorldBounds = true;
 
-			    ledge.body.immovable = true;
 
-			    ledge = platforms.create(-150, 250, 'ground');
+         		handRight = handsGroup.create(700,500,"hand");
+         		game.physics.enable( handRight, Phaser.Physics.ARCADE);
+         		handRight.scale.setTo(0.3,0.3)
+         		handRight.body.collideWorldBounds = true;
 
-			    ledge.body.immovable = true;
 
-			    player = game.add.sprite(32, game.world.height - 150, 'dude');
 
-			    //  We need to enable physics on the player
-			    game.physics.arcade.enable(player);
+         		handLeft1 = handsGroup.create(700,500,"hand1");
+         		game.physics.enable( handLeft1, Phaser.Physics.ARCADE);
+         		handLeft1.scale.setTo(0.3,0.3);
+         		handLeft1.body.collideWorldBounds = true;
 
-			    //  Player physics properties. Give the little guy a slight bounce.
-			    player.body.bounce.y = 0.2;
-			    player.body.gravity.y = 300;
-			    player.body.collideWorldBounds = true;
 
-			    //  Our two animations, walking left and right.
-			    player.animations.add('left', [0, 1, 2, 3], 10, true);
-			    player.animations.add('right', [5, 6, 7, 8], 10, true);
+         		handRight1 = handsGroup.create(700,500,"hand1");
+         		game.physics.enable( handRight1, Phaser.Physics.ARCADE);
+         		handRight1.scale.setTo(0.3,0.3)
+         		handRight1.body.collideWorldBounds = true;
 			}
 
+
 			function update() {
+				game.physics.arcade.collide(handsGroup, balloon);
+				game.physics.arcade.overlap(handsGroup, balloon, touchBalloon, null, this);
+
+
+				//Update hand pos
+
+				if(lastFrame){
+					var user = lastFrame[0];
+
+					handLeft.x = Kinect.scaleX(user.joints["HandLeft"].x,800);
+					handLeft.y = Kinect.scaleX(user.joints["HandLeft"].y,600);
+
+					handRight.x = Kinect.scaleX(user.joints["HandRight"].x,800);
+					handRight.y = Kinect.scaleX(user.joints["HandRight"].y,600);
+
+
+					var user1 = lastFrame[1];
+
+					if(user1){
+
+						handLeft1.x = Kinect.scaleX(user1.joints["HandLeft"].x,800);
+						handLeft1.y = Kinect.scaleX(user1.joints["HandLeft"].y,600);
+
+						handRight1.x = Kinect.scaleX(user1.joints["HandRight"].x,800);
+						handRight1.y = Kinect.scaleX(user1.joints["HandRight"].y,600);
+					}
+				}
+
+
+			}
+
+			function balloonRandom() {
+				balloon.x = (Math.random() * (800 - balloon.width));
+				balloon.y = (Math.random() * (600 - balloon.height));
+			}
+
+			function touchBalloon(hand,balloon){
+				balloonRandom();
+				score ++;
+				text.text = "Score: " + score;
 			}
 		</script>
 	</body>
