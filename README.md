@@ -28,5 +28,7 @@ For more detail, see the documentation.
 ## Installation
 Simply follow the [server setup instructions](https://github.com/2BoysAndHats/ThisMightWork/blob/master/README.md#installation), launch the new ThisMightWork app, and open a demo in your browser!
 
+(Note: on some browsers, you may have to run a server to stop permission with the images)
+
 ## Documentation
 Plese see the [wiki](https://github.com/2BoysAndHats/KinectJSBridge/wiki)
