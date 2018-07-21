@@ -1,5 +1,5 @@
 # KinectJSBridge
-####The ThisMightWork client (A Kinect data streaming API for Windows)
+#### The ThisMightWork client (A Kinect data streaming API for Windows)
 
 
 This is the client half of the ThisMightWork library. (You can find the server half [here](https://github.com/2BoysAndHats/ThisMightWork)) This a JavaScript library that enables web developers to develop applications that use Kinect body tracking technology super easily.
